@@ -1,0 +1,68 @@
+[package]
+name = "font-parse"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["Wyatt Au <wyatt_au@protonmail.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/WyattAu/font-parse"
+documentation = "https://docs.rs/font-parse"
+description = "SFNT/OTF/TrueType/WOFF/WOFF2 binary font parser — offset tables, character maps, glyph outlines, variable fonts"
+readme = "README.md"
+keywords = ["font", "ttf", "otf", "woff2", "sfnt"]
+categories = ["parser-implementations", "no-std", "text-processing"]
+exclude = [".github/", "fuzz/", "supply-chain/"]
+
+# Layer model: docs/layers.md in WyattAu/engineering-standards.
+# L0 — leaf: zero estate-internal dependencies by mandate.
+[package.metadata.layers]
+tier = "L0"
+
+[dependencies]
+font-types = "0.8"
+thiserror = "2"
+
+# Container decoding (std-scoped in v0.1; the SFNT core is no_std).
+miniz_oxide = { version = "0.8", optional = true }
+brotli-decompressor = { version = "6", optional = true }
+
+[features]
+default = ["std", "woff", "woff2"]
+# std-bound surface area: container decoding (WOFF/WOFF2), String lossy
+# decoding for the `name` table. no_std builds keep the full SFNT surface:
+# zero-copy views, cmap, glyf/loca outlines, fvar/avar/gvar, GSUB/GPOS
+# structure — everything except container decompression.
+std = []
+# WOFF 1.0 container (per-table zlib via miniz_oxide).
+woff = ["dep:miniz_oxide", "std"]
+# WOFF 2.0 container (Brotli stream + glyf/loca/hmtx transform reversal).
+woff2 = ["dep:brotli-decompressor", "std"]
+
+[dev-dependencies]
+proptest = "1"
+criterion = "0.5"
+trybuild = "1"
+
+[[bench]]
+name = "parse"
+harness = false
+
+[lints.rust]
+missing_docs = "deny"
+unsafe_code = "deny"
+
+# Decoder discipline (mirrors wire-kit): the parser is the estate's canonical
+# "never panics on input" surface for fonts. Every read is bounds-checked and
+# total: malformed input yields a typed ParseError, never a panic. The fuzz
+# and test targets lift these at the file level with justification; the lib
+# target never does.
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+indexing_slicing = "deny"
+undocumented_unsafe_blocks = "deny"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1

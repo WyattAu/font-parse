@@ -1,0 +1,8 @@
+fuzz/artifacts
+fuzz/coverage
+fuzz/target
+proptest-regressions/
+*.pyc
+__pycache__/
+target/
+wip

@@ -1,0 +1,22 @@
+[package]
+name = "font-parse-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.font-parse]
+path = ".."
+features = ["woff", "woff2"]
+
+[[bin]]
+name = "font_parse"
+path = "fuzz_targets/font_parse.rs"
+test = false
+doc = false
+bench = false

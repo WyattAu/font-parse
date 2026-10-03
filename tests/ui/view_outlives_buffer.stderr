@@ -1,0 +1,19 @@
+error[E0597]: `data2` does not live long enough
+  --> tests/ui/view_outlives_buffer.rs:15:22
+   |
+13 |     let view = {
+   |         ---- borrow later stored here
+14 |         let data2 = data.clone();
+   |             ----- binding `data2` declared here
+15 |         FontRef::new(&data2).unwrap()
+   |                      ^^^^^^ borrowed value does not live long enough
+16 |     }; // data2 dropped here
+   |     - `data2` dropped here while still borrowed
+
+warning: unused variable: `font`
+ --> tests/ui/view_outlives_buffer.rs:7:9
+  |
+7 |     let font = {
+  |         ^^^^ help: if this is intentional, prefix it with an underscore: `_font`
+  |
+  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
