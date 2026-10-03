@@ -19,7 +19,7 @@ exclude = [".github/", "fuzz/", "supply-chain/"]
 tier = "L0"
 
 [dependencies]
-font-types = "0.8"
+font-types = "0.12"
 thiserror = "2"
 
 # Container decoding (std-scoped in v0.1; the SFNT core is no_std).
