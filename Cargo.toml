@@ -23,7 +23,7 @@ font-types = "0.8"
 thiserror = "2"
 
 # Container decoding (std-scoped in v0.1; the SFNT core is no_std).
-miniz_oxide = { version = "0.8", optional = true }
+miniz_oxide = { version = "0.9", optional = true }
 brotli-decompressor = { version = "6", optional = true }
 
 [features]
