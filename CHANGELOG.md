@@ -4,10 +4,10 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 Semantic Versioning.
 
-## [0.1.0] — 2026-10-03
+## [0.1.0]: 2026-10-03
 
 ### Added
-- `FontRef` — zero-copy SFNT/TrueType/OTF view: offset table + table
+- `FontRef`: zero-copy SFNT/TrueType/OTF view: offset table + table
   directory validation, lifetime-bound raw table access (`table`,
   `table_by_tag`, `table_directory`), typed accessors (`head`, `hhea`,
   `hmtx`, `maxp`, `cmap`, `name`, `OS/2`, `post`, `stat`, `DSIG`, `layout`,
@@ -27,5 +27,5 @@ Semantic Versioning.
   glyf/loca/hmtx reversal, UIntBase128/255UInt16, checksum + checkSumAdjustment
   recomputation, head transform marker.
 - TTC collections: shared-table `FontRef`s and standalone extraction.
-- `ParseError` — typed, exhaustive; totality enforced by deny lints, a
+- `ParseError`: typed, exhaustive; totality enforced by deny lints, a
   cargo-fuzz target, and 500-case proptests; coverage ≥ 90% on parse code.

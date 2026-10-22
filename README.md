@@ -1,9 +1,9 @@
 # font-parse
 
-SFNT/OTF/TrueType/WOFF/WOFF2 binary font parser — offset tables, character
+SFNT/OTF/TrueType/WOFF/WOFF2 binary font parser: offset tables, character
 maps, glyph outlines, variable fonts.
 
-**Layer:** L0 — leaf · **Estate deps:** zero (by mandate) · **Core deps:**
+**Layer:** L0: leaf · **Estate deps:** zero (by mandate) · **Core deps:**
 `font-types` (scalar types) + `thiserror` · `no_std`-capable (`alloc` only;
 container decoding behind the `woff`/`woff2` features).
 
@@ -11,12 +11,12 @@ container decoding behind the `woff`/`woff2` features).
 
 | Module | Contents |
 |---|---|
-| `font` | [`FontRef`] — zero-copy view over `&[u8]` (SFNT offset table + table directory, lifetime-bound table slices), [`OwnedFont`] (WOFF/WOFF2/collection decoding into a validated buffer), [`FontCollection`] (TTC), [`VariableFont`] (fvar/avar/gvar) |
+| `font` | [`FontRef`]: zero-copy view over `&[u8]` (SFNT offset table + table directory, lifetime-bound table slices), [`OwnedFont`] (WOFF/WOFF2/collection decoding into a validated buffer), [`FontCollection`] (TTC), [`VariableFont`] (fvar/avar/gvar) |
 | `tables` | typed views: `head`, `hhea`, `hmtx`, `maxp`, `cmap` (formats 0/4/6/12), `loca`, `glyf` (simple + composite outlines), `name`, `OS/2`, `post`, `fvar`/`avar`, `gvar`, `GSUB`/`GPOS` structure, `stat`, `DSIG` |
 | `woff` | WOFF 1.0: per-table zlib (feature `woff`) |
 | `woff2` | WOFF 2.0: Brotli stream + glyf/loca/hmtx transform reversal, checksum recomputation, `head.flags` bit 11 (feature `woff2`) |
 | `reader` | bounds-checked big-endian read substrate (`TruncatedTable` on every shortfall) |
-| `error` | [`ParseError`] — the single typed, exhaustive error |
+| `error` | [`ParseError`]: the single typed, exhaustive error |
 
 [`FontRef`]: https://docs.rs/font-parse/latest/font_parse/struct.FontRef.html
 [`OwnedFont`]: https://docs.rs/font-parse/latest/font_parse/struct.OwnedFont.html
@@ -27,7 +27,7 @@ container decoding behind the `woff`/`woff2` features).
 ## Guarantees
 
 - **Total parsers**: malformed, truncated, or hostile input yields a typed
-  `ParseError` — never a panic, never an out-of-bounds read. Enforced by
+  `ParseError`: never a panic, never an out-of-bounds read. Enforced by
   deny-level lints (`unwrap_used`/`expect_used`/`panic`/`indexing_slicing`)
   on the lib target, a cargo-fuzz target over the main entry point, and
   500-case proptests over arbitrary and mutated input.
@@ -84,4 +84,4 @@ expected values together.
 
 ## Layer
 
-L0 — leaf. Zero estate-internal dependencies.
+L0: leaf. Zero estate-internal dependencies.
