@@ -1,13 +1,13 @@
 [package]
 name = "font-parse"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.85"
 authors = ["Wyatt Au <wyatt_au@protonmail.com>"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/WyattAu/font-parse"
 documentation = "https://docs.rs/font-parse"
-description = "SFNT/OTF/TrueType/WOFF/WOFF2 binary font parser — offset tables, character maps, glyph outlines, variable fonts"
+description = "SFNT/OTF/TrueType/WOFF/WOFF2 binary font parser: offset tables, character maps, glyph outlines, variable fonts"
 readme = "README.md"
 keywords = ["font", "ttf", "otf", "woff2", "sfnt"]
 categories = ["parser-implementations", "no-std", "text-processing"]
